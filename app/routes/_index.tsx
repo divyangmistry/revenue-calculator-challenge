@@ -37,7 +37,7 @@ export default function Index() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:p-20 p-15">
           <div className='md:w-4/6 lg:w-3/5 xl:w-4/6'>
 
-            <div className="text-lg mb-4">
+            <div className="text-lg mb-10">
               Add in your expected referrals to see how much you could earn as a <strong>Sunvoy Affiliate</strong> in just 1 year
             </div>
 
@@ -97,7 +97,7 @@ export default function Index() {
               />
             </div>
 
-            <div className="text-center mt-8">
+            <div className="text-center mt-10">
               <p className="text-2xl">Your <strong>monthly income</strong> after 1 year:</p>
               <p className="lg:text-7xl font-extrabold text-gray-800 mt-2 text-5xl">${monthlyIncome.toLocaleString()}</p>
             </div>

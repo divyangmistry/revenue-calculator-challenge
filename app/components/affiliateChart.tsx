@@ -34,7 +34,7 @@ const AffiliateChart: React.FC<AffiliateChartProps> = ({
       datasets: [
         {
           data: data.map(d => d.revenue),
-          backgroundColor: data.map((d, i) => i != (data.length - 1) ? '#d1d5db' : '#afcc54')
+          backgroundColor: data.map((d, i) => i != (data.length - 1) ? '#a9b3bc' : '#afcc54')
         },
       ],
     };
@@ -58,7 +58,7 @@ const AffiliateChart: React.FC<AffiliateChartProps> = ({
                 display: true,
                 align: 'top',
                 anchor: 'end',
-                color: '#d1d5db',
+                color: '#5b5d62',
                 opacity: 1,
                 formatter: function (value, context) {
                   return `$ ${value.toLocaleString()}`;
