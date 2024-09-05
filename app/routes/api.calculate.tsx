@@ -35,27 +35,25 @@ function calculateAffiliateRevenue(params: CalculatorParams) {
   let totalCustomers = referredCustomers;
   let totalRevenue = 0;
   let lastMonthRevenue = 0;
+  let newExistingProjects = existingProjects;
   const monthlyRevenues = [];
 
-  for (let month = 0; month <= 12; month++) {
-    if (month > 0) {
-      totalCustomers *= 1 - CHURN_RATE;
-    }
+  for (let month = 1; month <= 12; month++) {
+    if (month > 1) totalCustomers *= 1 - CHURN_RATE;
     totalCustomers += referredCustomers;
-    
+
     const monthlyRevenue =
-      totalCustomers * (newProjects * NEW_PROJECT_FEE + existingProjects * EXISTING_PROJECT_FEE);
+      totalCustomers * (newProjects * NEW_PROJECT_FEE + newExistingProjects * EXISTING_PROJECT_FEE);
 
     const affiliatePayout = monthlyRevenue * REFERRAL_PAYOUT_PERCENTAGE;
 
     totalRevenue += affiliatePayout;
+    newExistingProjects += newProjects;
 
-    if (month == 12) {
-      lastMonthRevenue = +affiliatePayout.toFixed();
-    }
+    if (month == 12) lastMonthRevenue = +affiliatePayout.toFixed();
 
     monthlyRevenues.push({
-      month: getMonthName(month),
+      month: getMonthName(month - 1),
       revenue: affiliatePayout.toFixed(),
     });
   }

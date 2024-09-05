@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-type RangeSliderProps = {
-  id: string;
-  min: number;
-  max: number;
-  initialValue: number;
-  onChange: (value: number) => void;
-};
-
 const RangeSlider: React.FC<RangeSliderProps> = ({ id, min, max, initialValue, onChange }) => {
   const [value, setValue] = useState<number>(initialValue);
 
