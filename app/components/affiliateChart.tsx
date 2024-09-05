@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { Chart, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 
 // // Register required components for Chart.js
 Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
@@ -41,9 +43,9 @@ const AffiliateChart: React.FC<AffiliateChartProps> = ({
   };
 
   return (
-    <div className='mt-5'>
+    <div className='mt-5 flex justify-center items-end content-end'>
       {loading ? (
-        <i className="fa-solid fa-circle-notch"></i>
+        <FontAwesomeIcon className='ml-1 animate-spin h-20 ' icon={faCircleNotch} />
       ) : (
         <Bar
           className='mt-5'

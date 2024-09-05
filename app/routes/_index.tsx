@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import AffiliateChart from '~/components/affiliateChart';
 import RangeSlider from '~/components/inputRangeSlider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
+import { faCircleInfo, faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 export const meta: MetaFunction = () => {
   return [
     { title: "Revenue Generation Calculator" },
@@ -16,17 +16,20 @@ export default function Index() {
   const [newProjects, setNewProjects] = useState<number>(10);
   const [existingProjects, setExistingProjects] = useState<number>(300);
   const [monthlyIncome, setMonthlyIncome] = useState<number>(3075);
-  
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     calculateApi();
   }, [referredCustomers, newProjects, existingProjects]);
 
   const calculateApi = async () => {
+    setLoading(true);
     const response = await fetch(
       `/api/calculate?referredCustomers=${referredCustomers}&newProjects=${newProjects}&existingProjects=${existingProjects}`
     );
     const data = await response.json();
     setMonthlyIncome(data.lastMonthRevenue.toLocaleString());
+    setLoading(false);
   };
 
   return (
@@ -58,7 +61,7 @@ export default function Index() {
             <div className="mb-4">
               <label className="mb-2 justify-between items-center flex">
                 <div className='group relative inline-block duration-300'>
-                  <p className="text-gray-600 font-semibold">Avg. new projects per month <FontAwesomeIcon className='ml-1' icon={faCircleInfo} />
+                  <p className="text-gray-600 font-semibold">Avg. new projects per month <FontAwesomeIcon className='ml-1 h-4' icon={faCircleInfo} />
                     <span
                       className="absolute hidden group-hover:flex -left-5 -top-2 -translate-y-full w-80 px-2 py-1 bg-gray-700 rounded-lg text-center text-white text-sm after:content-[''] after:absolute after:left-1/2 after:top-[100%] after:-translate-x-1/2 after:border-8 after:border-x-transparent after:border-b-transparent after:border-t-gray-700">
                       This is the number of new projects each of your referred customer installs on
@@ -79,7 +82,7 @@ export default function Index() {
             <div className="mb-4">
               <label className="mb-2 justify-between items-center flex">
                 <div className='group relative inline-block duration-300'>
-                  <p className="text-gray-600 font-semibold">Avg. existing projects <FontAwesomeIcon className='ml-1' icon={faCircleInfo} />
+                  <p className="text-gray-600 font-semibold">Avg. existing projects <FontAwesomeIcon className='ml-1 h-4' icon={faCircleInfo} />
                     <span
                       className="absolute hidden group-hover:flex -left-5 -top-2 -translate-y-full w-80 px-2 py-1 bg-gray-700 rounded-lg text-center text-white text-sm after:content-[''] after:absolute after:left-1/2 after:top-[100%] after:-translate-x-1/2 after:border-8 after:border-x-transparent after:border-b-transparent after:border-t-gray-700">
                       This is the number of existing projects each of your referred customer already has
@@ -97,9 +100,17 @@ export default function Index() {
               />
             </div>
 
-            <div className="text-center mt-10">
+            <div className="text-center content-center mt-10">
               <p className="text-2xl">Your <strong>monthly income</strong> after 1 year:</p>
-              <p className="lg:text-7xl font-extrabold text-gray-800 mt-2 text-5xl">${monthlyIncome.toLocaleString()}</p>
+
+              {loading ? (
+                <FontAwesomeIcon className='ml-1 animate-spin h-20 text-center' icon={faCircleNotch} />
+              ) : (
+                <p className="lg:text-7xl font-extrabold text-gray-800 mt-2 text-5xl">
+                  ${monthlyIncome.toLocaleString()}
+                </p>
+              )
+              }
             </div>
           </div>
 
