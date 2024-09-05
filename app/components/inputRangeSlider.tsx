@@ -20,7 +20,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({ id, min, max, initialValue, o
     const percentage = ((value - min) / (max - min)) * 100;
     const rangeInput = document.getElementById(id) as HTMLInputElement;
     if (rangeInput) {
-      rangeInput.style.background = `linear-gradient(to right, #b0cc53 0%, #b0cc53 ${percentage}%, #D1D5DB ${percentage}%, #D1D5DB 100%)`;
+      rangeInput.style.background = `linear-gradient(to right, #afcc54 0%, #afcc54 ${percentage}%, #D1D5DB ${percentage}%, #D1D5DB 100%)`;
     }
   };
 

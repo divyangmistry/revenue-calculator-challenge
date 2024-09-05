@@ -5,7 +5,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        mintgreen: '#b0cc53'
+        mintgreen: '#afcc54'
       }
     },
   },
